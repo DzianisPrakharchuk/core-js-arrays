@@ -92,8 +92,11 @@ function findElement(arr, value) {
  *    findAllOccurrences([ null, undefined, null ], null) => 2
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, item) {
+  const newArr = arr
+    .map((element, index) => (element === item ? index : -1))
+    .filter((index) => index !== -1);
+  return newArr.length;
 }
 
 /**
