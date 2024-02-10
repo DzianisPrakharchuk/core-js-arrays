@@ -498,8 +498,11 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const arrSorted = arr.sort((a, b) => {
+    return b - a;
+  });
+  return arrSorted.slice(0, n);
 }
 
 /**
@@ -514,8 +517,8 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  return arr1.filter((elem) => arr2.includes(elem));
 }
 
 /**
@@ -529,8 +532,20 @@ function findCommonElements(/* arr1, arr2 */) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  return nums.reduce(
+    (result, num, index) => {
+      const { maxLength, currentLength } = result;
+      if (index > 0 && num > nums[index - 1]) {
+        return {
+          maxLength: Math.max(maxLength, currentLength + 1),
+          currentLength: currentLength + 1,
+        };
+      }
+      return { maxLength, currentLength: 1 };
+    },
+    { maxLength: 1, currentLength: 1 }
+  ).maxLength;
 }
 
 /**
